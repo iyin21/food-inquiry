@@ -10,7 +10,7 @@ const UsdRateModal = ({
     usdRate: number
 }) => {
     return (
-        <div className="fixed inset-4 bg-opacity-50 backdrop-blur-xs flex items-center justify-center">
+        <div className="fixed inset-0 bg-opacity-50 backdrop-blur-xs flex items-center justify-center">
             <div className="bg-white p-6 rounded-md  h-[200px] w-[350px]">
                 <div className="flex justify-end">
                     <GrClose
@@ -26,7 +26,7 @@ const UsdRateModal = ({
                         Conversion Rate
                     </h5>
                 </div>
-                <p className="mt-2 text-lg">This is ₦{cost} converted to naira</p>
+                <p className="mt-2 text-lg">This is ₦{cost} converted to  dollars</p>
                 <p>USD Equivalent: <span className="font-bold mt-1">${(cost * usdRate).toFixed(2)}</span> </p>
             </div>
         </div>

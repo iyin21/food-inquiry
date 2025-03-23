@@ -20,12 +20,12 @@ interface RecipeInterface {
 }
 export default function Home() {
     const [query, setQuery] = useState("")
-    
+
     const [recipes, setRecipes] = useState<RecipeInterface[]>([])
     const [cost, setCost] = useState(0)
     const [showModal, setShowModal] = useState(false)
 
-    const { data, refetch, isFetching, } = useRecipeSearch({ q: query })
+    const { data, refetch, isFetching } = useRecipeSearch({ q: query })
     const { data: usdRateData } = useUsdRate()
 
     useEffect(() => {
@@ -40,10 +40,10 @@ export default function Home() {
             setRecipes(recipeData || [])
         }
     }, [data])
-    console.log("ffd", query)
+
 
     return (
-        <div className={`min-hscreen`}>
+        <div className={`min-h-screen`}>
             {!data && !isFetching ? (
                 <div
                     className={`px-8 bg-[url("/foodBackground1.jpeg")] bg-cover md:pt-60 pt-40  items-center  min-h-screen `}
@@ -51,12 +51,14 @@ export default function Home() {
                     <h1 className="text-3xl font-bold text-purple-700 text-center ">
                         Food Inquiry App
                     </h1>
-                    <div className="flex justify-center mt-2">
+                    <div className="flex justify-center mt-2 text-center">
                         <Link
                             href={"/restaurants"}
-                            className="text-lg underline font-semibold"
+                            className="text-lg underline  font-semibold"
                         >
-                            Click here to view Restaurants nearby
+                            <span className="text-center">
+                                Click here to view Restaurants nearby
+                            </span>
                         </Link>
                     </div>
                     <p className="text-center mt-2 text-lg font-semibold text-white  drop-shadow-lg">
@@ -69,13 +71,16 @@ export default function Home() {
                             <input
                                 className="pl-2 outline-none"
                                 type="text"
-                                placeholder="Search for a recipe..."
+                                placeholder={"Search for a recipe..."}
                                 value={query}
-                                onChange={(e) => setQuery(e.target.value)}
+                                onChange={(e) =>
+                                    setQuery(e.target.value)
+                                }
                             />
                             <button
                                 className="ml-2  text-white p-2 rounded-md bg-[white] hover:bg-[#F4F4F4] cursor-pointer"
-                                onClick={() => refetch()} disabled={isFetching}
+                                onClick={() => {query && refetch(); setQuery("")}}
+                                disabled={isFetching}
                             >
                                 <FiSearch
                                     size="22px"
@@ -94,14 +99,14 @@ export default function Home() {
             ) : (
                 <div>
                     <div
-                        className=" p-4 gap-4 items-center
+                        className=" p-4  gap-4 items-center
                     flex justify-between flex-wrap"
                     >
                         <h1 className="text-2xl font-bold text-purple-700 text-center ">
                             Food Inquiry App
                         </h1>
                         <div className="flex ">
-                            <div className="flex bg-[#F4F4F4]  items-center rounded-full  px-4 py-3 md:w justify-between">
+                            <div className="flex bg-[#F4F4F4]  items-center rounded-full  px-4 py-3  justify-between">
                                 <FiSearch
                                     size="22px"
                                     color="#868686"
@@ -110,16 +115,18 @@ export default function Home() {
                                 <input
                                     className="pl-2 outline-none"
                                     type="text"
-                                    placeholder="Search for a recipe..."
+                                    placeholder="Search a recipe..."
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
                                 />
-                               
                             </div>
                             <Button
                                 className="ml-2 bg-purple-600 text-white p-2 rounded-md"
-                                onClick={() => refetch()} disabled={isFetching}
-                                
+                                onClick={() => {
+                                    query && refetch()
+                                    setQuery("")
+                                }}
+                                disabled={isFetching}
                             >
                                 {isFetching ? "Searching..." : "Search"}
                             </Button>
@@ -134,7 +141,7 @@ export default function Home() {
                         </div>
                     </div>
                     {recipes && recipes.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6 ">
+                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-6 p-4">
                             {recipes.map((item, index) => (
                                 <div
                                     key={index}
@@ -172,7 +179,7 @@ export default function Home() {
                             ))}
                         </div>
                     ) : (
-                        <div className="h-full w-full flex items-center justify-center pt-20 font-semibold">
+                        <div className="h-full w-full flex items-center justify-center pt-20 font-semibold px-2">
                             <p className="text-purple-500">
                                 No recipe matches your search. Try Searching for
                                 another
