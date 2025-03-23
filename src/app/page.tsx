@@ -79,7 +79,7 @@ export default function Home() {
                             />
                             <button
                                 className="ml-2  text-white p-2 rounded-md bg-[white] hover:bg-[#F4F4F4] cursor-pointer"
-                                onClick={() => {query && refetch(); setQuery("")}}
+                                onClick={() => refetch()}
                                 disabled={isFetching}
                             >
                                 <FiSearch
@@ -122,10 +122,10 @@ export default function Home() {
                             </div>
                             <Button
                                 className="ml-2 bg-purple-600 text-white p-2 rounded-md"
-                                onClick={() => {
-                                    query && refetch()
-                                    setQuery("")
-                                }}
+                                onClick={() => 
+                                    refetch()
+                                    
+                                }
                                 disabled={isFetching}
                             >
                                 {isFetching ? "Searching..." : "Search"}
