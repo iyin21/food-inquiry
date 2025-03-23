@@ -10,8 +10,8 @@ const UsdRateModal = ({
     usdRate: number
 }) => {
     return (
-        <div className="fixed inset-4 bg-gra bg-opacity-50 backdrop-blur-xs flex items-center justify-center">
-            <div className="bg-white p-6 rounded-md">
+        <div className="fixed inset-4 bg-opacity-50 backdrop-blur-xs flex items-center justify-center">
+            <div className="bg-white p-6 rounded-md  h-[200px] w-[350px]">
                 <div className="flex justify-end">
                     <GrClose
                         onClick={() => setShowModal(false)}

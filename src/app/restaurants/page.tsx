@@ -2,10 +2,14 @@
 import { useEffect, useState } from "react"
 import { FaMapMarkerAlt } from "react-icons/fa"
 import { useRestaurants } from "app/hooks/useRestaurant"
+import dynamic from "next/dynamic"
+import loadingAnimation from "../../../public/loading.json"
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false })
 
 const Restaurants = () => {
     const [location, setLocation] = useState({ lat: 0, long: 0 })
-    const [loading, setLoading] = useState(true)
+    //const [loading, setLoading] = useState(true)
     const [error, setError] = useState("")
 
     useEffect(() => {
@@ -27,7 +31,7 @@ const Restaurants = () => {
             )
         } else {
             setError("Geolocation is not supported.")
-            setLoading(false)
+           
         }
     }, [])
     const { data, isLoading } = useRestaurants({
@@ -40,8 +44,11 @@ const Restaurants = () => {
                 Restaurants Near You
             </h1>
 
-            {(loading || isLoading) && (
-                <p className="text-lg">Fetching restaurants...</p>
+            { isLoading&& (
+                <Lottie
+                animationData={loadingAnimation}
+                className="w-20 mx-auto mt-6 "
+            />
             )}
             {error && <p className="text-red-500">{error}</p>}
 

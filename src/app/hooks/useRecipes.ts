@@ -5,7 +5,7 @@ export function useRecipeSearch({ q }: { q: string }) {
     const result = useQuery({
         queryKey: ["recipes"],
         queryFn: () => fetchRecipes({ q }),
-        enabled: !!q,
+        enabled: false
     })
     return result
 }
