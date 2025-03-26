@@ -41,12 +41,11 @@ export default function Home() {
         }
     }, [data])
 
-
     return (
         <div className={`min-h-screen`}>
             {!data && !isFetching ? (
                 <div
-                    className={`px-8 bg-[url("/foodBackground1.jpeg")] bg-cover md:pt-60 pt-40  items-center  min-h-screen `}
+                    className={`px-8 bg-[url("/foodBackground1.jpeg")]  bg-cover  bg-no-repeat flex flex-col justify-center bg-center w-full   items-center h-screen min-h-screen `}
                 >
                     <h1 className="text-3xl font-bold text-purple-700 text-center ">
                         Food Inquiry App
@@ -66,29 +65,25 @@ export default function Home() {
                         count and cost
                     </p>
 
-                    <div className="flex justify-center mt-6">
-                        <div className="flex bg-white [#F4F4F4]  items-center rounded-md  px-4 py-3 md:w-2/4 justify-between">
-                            <input
-                                className="pl-2 outline-none"
-                                type="text"
-                                placeholder={"Search for a recipe..."}
-                                value={query}
-                                onChange={(e) =>
-                                    setQuery(e.target.value)
-                                }
+                    <div className="flex bg-white [#F4F4F4] mt-6  items-center rounded-md  px-4 py-3 md:w-2/4 justify-between">
+                        <input
+                            className="pl-2 outline-none"
+                            type="text"
+                            placeholder={"Search for a recipe..."}
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                        />
+                        <button
+                            className="ml-2  text-white p-2 rounded-md bg-[white] hover:bg-[#F4F4F4] cursor-pointer"
+                            onClick={() => refetch()}
+                            disabled={isFetching}
+                        >
+                            <FiSearch
+                                size="22px"
+                                color="#868686"
+                                className=""
                             />
-                            <button
-                                className="ml-2  text-white p-2 rounded-md bg-[white] hover:bg-[#F4F4F4] cursor-pointer"
-                                onClick={() => refetch()}
-                                disabled={isFetching}
-                            >
-                                <FiSearch
-                                    size="22px"
-                                    color="#868686"
-                                    className=""
-                                />
-                            </button>
-                        </div>
+                        </button>
                     </div>
                 </div>
             ) : isFetching ? (
@@ -122,10 +117,7 @@ export default function Home() {
                             </div>
                             <Button
                                 className="ml-2 bg-purple-600 text-white p-2 rounded-md"
-                                onClick={() => 
-                                    refetch()
-                                    
-                                }
+                                onClick={() => refetch()}
                                 disabled={isFetching}
                             >
                                 {isFetching ? "Searching..." : "Search"}
