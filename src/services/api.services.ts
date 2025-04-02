@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL = `https://api.edamam.com/`
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
 
 
 const RESTAURANT_BASE_URL="http://localhost:3000"

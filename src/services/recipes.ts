@@ -1,14 +1,15 @@
 import { axiosInstance } from "./api.services"
+
 import { RecipeResponse } from "@/types/recipe"
 
 export const fetchRecipes = async ({ q }: { q: string }) => {
     const response = await axiosInstance.get<RecipeResponse>("/search", {
         headers: {
-            "Edamam-Account-User": "Iyin",
+            "Edamam-Account-User":process.env.NEXT_PUBLIC_EDAMAN_ACCOUNT_USER,
         },
         params: {
-            app_id: "c143d570",
-            app_key: "e77a6064c858b48d64b0882f232203a5",
+            app_id: process.env.NEXT_PUBLIC_EDAMAN_APP_ID,
+            app_key: process.env.NEXT_PUBLIC_EDAMAN_APP_KEY,
             q,
         },
     })
